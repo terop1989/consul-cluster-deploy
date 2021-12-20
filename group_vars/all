@@ -1,0 +1,9 @@
+---
+ansible_user : ansible
+
+consul_binary_directory : /usr/local/bin
+consul_bootstrap_directory : /etc/consul.d/bootstrap
+consul_data_directory : /var/consul
+consul_token : 2s0N/ga69sUx9aFDuxyS/KzARVGPFwRVINUpvIpBMOY=
+
+datacenter_name : dc1

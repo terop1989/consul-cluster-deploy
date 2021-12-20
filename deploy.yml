@@ -1,0 +1,40 @@
+---
+- name: Consul Cluster Deployment
+  hosts: all
+  become: yes
+  become_method: sudo
+
+  tasks:
+
+  - name: Download Consul Package
+    become: false
+    get_url:
+      url: https://releases.hashicorp.com/consul/1.10.1/consul_1.10.1_linux_amd64.zip
+      dest: /tmp
+    delegate_to: localhost
+
+  - name: Unarchive Consul Binary
+    unarchive:
+      src: /tmp/consul_1.10.1_linux_amd64.zip
+      dest: "{{ consul_binary_directory }}"
+
+  - name: Create Consul Bootstrap Directory
+    file:
+      path: "{{ consul_bootstrap_directory }}"
+      state: directory
+
+  - name: Create Consul Config File
+    template:
+      src: config.json.j2
+      dest: "{{ consul_bootstrap_directory }}/config.json"
+
+  - name: Create Consul systemd config file
+    template:
+      src: consul.service.j2
+      dest: /etc/systemd/system/consul.service
+
+  - name: Restart Consul service
+    systemd:
+      name: consul
+      state: restarted
+      daemon_reload: true
