@@ -1,5 +1,5 @@
 {
-"bind_addr": "{{ consul_bind_address }}",
+"bind_addr": "{{ advertise_ip }}",
 "bootstrap": true,
 "client_addr": "{{ consul_client_address }}",
 "datacenter": "{{ datacenter_name }}",
@@ -8,11 +8,7 @@
 "enable_syslog": true,
 "encrypt": "{{ consul_token }}",
 "log_level": "INFO",
-"start_join": [
-{% for consul_server in groups['servers'] %}
-   "{{ consul_server }}"
-{% endfor %}
-],
+"start_join": [ {{ consul_list|trim() }}  ],
 "server": true,
 "ui_config": { "enabled": true }
 }
