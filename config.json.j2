@@ -8,6 +8,7 @@
 "enable_syslog": true,
 "encrypt": "{{ consul_token }}",
 "log_level": "INFO",
+"retry_join": [ {{ consul_list|trim() }}  ],
 "start_join": [ {{ consul_list|trim() }}  ],
 "server": true,
 "ui_config": { "enabled": true }
