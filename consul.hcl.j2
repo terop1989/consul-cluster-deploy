@@ -1,0 +1,23 @@
+node_name = "{{ ansible_hostname }}"
+
+server = true
+bootstrap_expect = 3
+
+ui_config {
+    enabled = true
+}
+
+node_meta {
+
+}
+
+datacenter = "{{ datacenter_name }}"
+
+## Addresses ##
+bind_addr = "{{ advertise_ip }}"
+client_addr = "{{ consul_client_address }}"
+
+## Directories ##
+data_dir = "{{ consul_data_directory }}"
+
+retry_join = [ {{ consul_list|trim() }} ]
