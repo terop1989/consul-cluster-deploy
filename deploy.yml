@@ -7,8 +7,8 @@
 
   - name: Download Consul Package
     get_url:
-      url: https://releases.hashicorp.com/consul/{{ consul_version }}/consul_{{ consul_version }}_linux_amd64.zip
-      dest: /tmp
+      url: "https://releases.hashicorp.com/consul/{{ consul_version }}/consul_{{ consul_version }}_linux_amd64.zip"
+      dest: "{{ consul_temporary_directory }}"
 
 
 - hosts: all
@@ -19,7 +19,7 @@
 
   - name: Unarchive Consul Binary
     unarchive:
-      src: /tmp/consul_{{ consul_version }}_linux_amd64.zip
+      src: "{{ consul_temporary_directory }}/consul_{{ consul_version }}_linux_amd64.zip"
       dest: "{{ consul_binary_directory }}"
 
   - name: Create Consul Bootstrap Directory
