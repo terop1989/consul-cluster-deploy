@@ -22,10 +22,14 @@
       src: "{{ consul_temporary_directory }}/consul_{{ consul_version }}_linux_amd64.zip"
       dest: "{{ consul_binary_directory }}"
 
-  - name: Create Consul Bootstrap Directory
+  - name: Create Consul Directories
     file:
-      path: "{{ consul_bootstrap_directory }}"
+      path: "{{ item }}"
       state: directory
+      mode: 0755
+    loop:
+      - "{{ consul_bootstrap_directory }}"
+      - "{{ consul_data_directory }}"
 
   - name: Create Consul Servers List
     set_fact:
