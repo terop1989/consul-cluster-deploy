@@ -2,7 +2,6 @@
 ansible_user: ansible
 
 consul_binary_directory: /usr/local/bin
-consul_bind_address: 0.0.0.0
 consul_bootstrap_directory: /etc/consul.d/bootstrap
 consul_client_address: 0.0.0.0
 consul_data_directory: /var/consul
