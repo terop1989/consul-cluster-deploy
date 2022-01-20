@@ -7,7 +7,7 @@
 
   - name: Download Consul Package
     get_url:
-      url: https://releases.hashicorp.com/consul/1.10.1/consul_1.10.1_linux_amd64.zip
+      url: https://releases.hashicorp.com/consul/{{ consul_version }}/consul_{{ consul_version }}_linux_amd64.zip
       dest: /tmp
 
 
@@ -19,7 +19,7 @@
 
   - name: Unarchive Consul Binary
     unarchive:
-      src: /tmp/consul_1.10.1_linux_amd64.zip
+      src: /tmp/consul_{{ consul_version }}_linux_amd64.zip
       dest: "{{ consul_binary_directory }}"
 
   - name: Create Consul Bootstrap Directory
@@ -32,7 +32,7 @@
       consul_list: >-
         {% set consul_servers_list = [] %}
         {% for host in groups['servers'] %}
-        {{ consul_servers_list.append('"' + hostvars[host].advertise_ip + '"') }}
+        {{ consul_servers_list.append('"' + hostvars[host].advertise_ip + ':' + '8301' + '"') }}
         {% endfor %}
         {{ consul_servers_list|unique|join(', ') }}
 
