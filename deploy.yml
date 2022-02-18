@@ -42,8 +42,8 @@
 
   - name: Create Consul Config File
     template:
-      src: config.json.j2
-      dest: "{{ consul_bootstrap_directory }}/config.json"
+      src: consul.hcl.j2
+      dest: "{{ consul_bootstrap_directory }}/consul.hcl"
 
   - name: Create Consul systemd config file
     template:
@@ -55,3 +55,4 @@
       name: consul
       state: restarted
       daemon_reload: true
+      enabled: true
